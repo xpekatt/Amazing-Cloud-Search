@@ -1,4 +1,20 @@
+<<<<<<< HEAD
 WARNING [Beta] - API-2013
+=======
+Amazing Cloud Search - C# API For Amazon Cloud Search
+============
+
+Allow you to search, faceted search, add, update, remove objects from your Amazon Cloud Search Index in C#.
+For using the 2013 API [see the 2013-API branch.](https://github.com/martin-magakian/Amazing-Cloud-Search/tree/2013-API "Title") 
+
+
+Contribute
+---------
+Amazon CloudSearch is a AWS library created and maintain by [Anomaly Detection](https://anomaly.io)<br />
+Feel free to contribute to the project using push request.
+
+How to use
+>>>>>>> refs/remotes/martin-magakian/master
 ---------
 
 I recieved this big pull request from Tyler. It's suppose to work with Amazon CloudSearch API 2013.
@@ -7,7 +23,14 @@ Unfoturnly I never had time to test this code.
 So try at your own risk ;-)
 Let me know if you can use this project.
 
+<<<<<<< HEAD
 
+=======
+Contact
+=========
+Developed by Martin Magakian dev.martin.magakian@gmail.com<br />
+by [Anomaly Detection](https://anomaly.io)
+>>>>>>> refs/remotes/martin-magakian/master
 
 
 
@@ -16,6 +39,7 @@ EXTRA
 
 In the following email Tyler explain me a little bit about his work:
 
+<<<<<<< HEAD
 
 > 	Hi Martin,
 > 
@@ -34,3 +58,5 @@ In the following email Tyler explain me a little bit about his work:
 > 	The one thing library is missing and I would like to build at some point is url enconding for input parameters.  It would also be great if json serialization could come from .Net > and to drop the postsharp so that there was just 1 single library to include.
 > 
 > 	Thanks again for all your great work, we got a huge jump start on the project thanks to your library.  I think you could get a LOT of use of this library because its the best one > available right now for .Net and CloudSearch.
+=======
+>>>>>>> refs/remotes/martin-magakian/master
