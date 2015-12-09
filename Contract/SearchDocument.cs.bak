@@ -14,6 +14,5 @@ namespace AmazingCloudSearch.Contract
 
         [ScriptIgnoreAttribute]
         public string id { get; set; }
-        public string highlights { get; set; }
     }
 }

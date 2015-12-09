@@ -9,7 +9,6 @@ namespace AmazingCloudSearch.Contract.Result
     public class FacetResult
     {
         public string Name { get; set; }
-        //public List<Constraint> Contraint { get; set; }
-        public List<Bucket> Buckets { get; set; }
+        public List<Constraint> Contraint { get; set; }
     }
 }

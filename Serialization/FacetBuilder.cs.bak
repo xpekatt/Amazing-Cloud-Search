@@ -42,33 +42,13 @@ namespace AmazingCloudSearch.Serialization
 
             foreach (KeyValuePair<string, object> pair in facetDictionary)
             {
-                //var contraints = CreateContraint(pair);
-                //liFacet.Add(new FacetResult { Name = pair.Key, Contraint = contraints.constraints });
-                var buckets = CreateBuckets(pair);
-                liFacet.Add(new FacetResult { Name = pair.Key, Buckets = buckets });
-
+                var contraints = CreateContraint(pair);
+                liFacet.Add(new FacetResult { Name = pair.Key, Contraint = contraints.constraints });
             }
 
             return liFacet;
         }
-        private List<Bucket> CreateBuckets(KeyValuePair<string, object> pair)
-        {
-            var tmpBuckets = JsonConvert.SerializeObject(pair.Value);
-            /* 
-			tmpBuckets = {"language": {
-				"buckets": [
-						{"value": "en-us",        
-		 				 "count": 31      },      
-						{"value": "de-DE",        
-						 "count": 4      }   
-							]  
-			}
-             */
-            var buckets = JsonConvert.DeserializeObject<Buckets>(tmpBuckets.ToString());
-          //  buckets.BucketName = pair.Key;
-            return buckets.buckets;
 
-        }
         private Constraints CreateContraint(KeyValuePair<string, object> pair)
         {
             try

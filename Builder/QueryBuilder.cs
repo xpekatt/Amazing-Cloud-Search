@@ -44,14 +44,48 @@ namespace AmazingCloudSearch.Builder
 
 			FeedFacet(query.Facets, url);
 
+            FeedFacetFilter(query.FacetFilters, url);
+
 			FeedReturnFields(query.Fields, url);
 
 			FeedMaxResults(query.Size, url);
 
 			FeedStartResultFrom(query.Start, url);
 
+            FeedHighlight(query.Highlight, url);
+
 			return url.ToString();
 		}
+
+        private void FeedFacetFilter(List<string> list, StringBuilder url)
+        {
+
+            if(list.Any())
+            {
+                url.Append("&");
+                url.Append("fq=");
+                url.Append("(");
+                url.Append(" and ");
+                foreach (string s in list)
+                {
+
+                    url.Append( s +' ');
+                }
+                url.Append(")");
+            }
+        }
+
+        private void FeedHighlight(string highlight, StringBuilder url)
+        {
+            if (!string.IsNullOrEmpty(highlight))
+            {
+                url.Append("&");
+                url.Append("highlight.");
+                url.Append(highlight);
+                //url.Append("={pre_tag:'<strong>', post_tag:'</strong>'}");
+                url.Append("={format:'text'}");
+            }
+        }
 
 		public string BuildFromPublicSearchQuery(string publicSearchQueryString, SearchQuery<T> query)
 		{
@@ -98,6 +132,7 @@ namespace AmazingCloudSearch.Builder
 
         private void FeedBooleanCritera(BooleanQuery booleanQuery, StringBuilder url)
         {
+            if (booleanQuery == null) return;
             if(booleanQuery.Conditions == null || booleanQuery.Conditions.Count == 0)
                 return;
 
@@ -203,7 +238,7 @@ namespace AmazingCloudSearch.Builder
         {
             FeedFacetList(facets, url);
 
-            FeedFacetConstraints(facets, url);
+           // FeedFacetConstraints(facets, url);
         }
 
         private void FeedFacetList(List<Facet> facets, StringBuilder url)
@@ -218,21 +253,25 @@ namespace AmazingCloudSearch.Builder
 				url.Append("&");
 			}
 
-            url.Append("facet=");
+            
 
             Facet lastItem = facets.Last();
             foreach (var facet in facets)
             {
-                url.Append(facet.Name);
+                url.Append("facet." + facet.Name + "={}"); // default behaviour for now.
+                //url.Append(facet.Name);
 
                 if (!object.ReferenceEquals(lastItem, facet))
-                    url.Append(",");
+                    url.Append("&");
             }
 
         }
 
         private void FeedFacetConstraints(List<Facet> facets, StringBuilder url)
-		{
+        {
+            return; // FacetConstraints no longer exist in 2013-01-01 API as such.
+            // This will be rewritten later to handle sort, index, bucket, whatever...
+
 			if (facets == null || facets.Count == 0)
 				return;
 
@@ -282,7 +321,7 @@ namespace AmazingCloudSearch.Builder
 				url.Append("&");
 			}
 
-            url.Append("return-fields=");
+            url.Append("return=");
 
             foreach (var field in fields)
             {

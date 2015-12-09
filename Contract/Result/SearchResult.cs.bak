@@ -39,7 +39,6 @@ namespace AmazingCloudSearch.Contract.Result
         {
             public string id { get; set; }
             public T data { get; set; }
-            public string highlights { get; set; }
         }
 
         public class Info
@@ -52,10 +51,7 @@ namespace AmazingCloudSearch.Contract.Result
             [JsonProperty("cpu-time-ms")]
             public int cpuTimeMs { get; set; }
         }
-        public List<FacetResult> GetFacets()
-        {
-                return facetsResults;
-        }
+
 		public List<Constraint> GetFacetResults(string name)
 		{
 			List<Constraint> contraints = null;
@@ -66,7 +62,7 @@ namespace AmazingCloudSearch.Contract.Result
 				{
 					if (facetResult.Name == name)
 					{
-						//contraints = facetResult.Contraint;
+						contraints = facetResult.Contraint;
 						break;
 					}
 				}

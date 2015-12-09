@@ -22,6 +22,10 @@ namespace AmazingCloudSearch.Query
 
         public int? Size { get; set; }
 
+        public string Highlight { get; set; }
+
+        public List<string> FacetFilters { get; set; }
+
 		public string PublicSearchQueryString { get; set; }
 
 		public SearchQuery(bool buildFieldsFromType = true)

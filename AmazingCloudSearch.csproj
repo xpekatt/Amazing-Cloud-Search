@@ -54,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builder\ActionBuilder.cs" />
+    <Compile Include="Contract\Facet\Bucket.cs" />
+    <Compile Include="Contract\Facet\Buckets.cs" />
     <Compile Include="Contract\Facet\Constraint.cs" />
     <Compile Include="Contract\Facet\Constraints.cs" />
     <Compile Include="Contract\Result\FacetResult.cs" />

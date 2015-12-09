@@ -28,35 +28,20 @@ namespace AmazingCloudSearch.Serialization
 
             foreach(var hitDocument in dyHit)
             {
-                
-               //  Dictionary<string, List<string>> jsonHitField = _serializer.Deserialize<Dictionary<string, List<string>>>(hitDocument.data.ToString());
-               // Dictionary<string, List<string>> jsonHitField = _serializer.Deserialize<Dictionary<string, List<string>>>( hitDocument );
-                Newtonsoft.Json.Linq.JObject jO = (Newtonsoft.Json.Linq.JObject)hitDocument;
-                jO.Last.ToString();
+                Dictionary<string, List<string>> jsonHitField = _serializer.Deserialize<Dictionary<string, List<string>>>(hitDocument.data.ToString());
 
-                string jz = jO.Last.ToString();
-                string jzw = jO["fields"].ToString();
+                T hit = Map(jsonHitField);
 
-
-                Newtonsoft.Json.Linq.JObject jHighlights = (Newtonsoft.Json.Linq.JObject)jO["highlights"];
-
-                jO["fields"]["highlight"] = jO["highlights"]["content"].ToString();
-
-                T hit = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(jO["fields"].ToString());
-                hit.id = hitDocument.id;
-                jO["highlights"]["content"].ToString();
-                
-                searchResult.hits.hit.Add(new SearchResult<T>.Hit<T> { id = hitDocument.id, data = hit, highlights = jO["highlights"]["content"].ToString() });
+                searchResult.hits.hit.Add(new SearchResult<T>.Hit<T> { id = hitDocument.id, data = hit });
             }
         }
 
-        private T Map(Dictionary<string, string> data)
+        private T Map(Dictionary<string, List<string>> data)
         {
             var hit = new T();
 
             foreach (var p in _listProperties.GetProperties())
             {
-                
                 List<string> newValues = FindField(p.Name, data);
 
                 if (newValues==null)
